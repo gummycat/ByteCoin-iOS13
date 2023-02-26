@@ -55,11 +55,14 @@ extension BitCoinViewController : UIPickerViewDelegate {
 // MARK: - CoinManagerDelegate
 
 extension BitCoinViewController : CoinManagerDelegate {
-  func didFailWithError(error: Error) {
+  func didFailWithError(_ error: Error) {
     print(error)
   }
   
   func didUpdateCoin(coinModel: CoinModel) {
-    
+    DispatchQueue.main.async {
+      self.bitcoinLabel.text = coinModel.rateString
+      self.currencyLabel.text = coinModel.currency
+    }
   }
 }
